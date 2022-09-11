@@ -38,13 +38,22 @@ public class SolutionBFS {
         // initialize the queue
         Queue<int[]> queue = new LinkedList<int[]>();
         queue.add(question.getSlidingList());
+
+
         // marked the initial question configuration as "visited"
-        List<int[]> visitedConfig = new ArrayList<>();
-        visitedConfig.add(question.getSlidingList());
+//        List<int[]> visitedConfig = new ArrayList<>();
+//        visitedConfig.add(question.getSlidingList());
+        // set method
+        Set<String> visitedID = new HashSet<>();
+        visitedID.add(makeListToString(question.getSlidingList()));
+
+
+
         // record and initialize moveSet
         Queue<List<MoveSet>> moveQueue = new LinkedList<List<MoveSet>>();
         List<MoveSet> initialStep = new ArrayList<>();
         moveQueue.add(initialStep);
+
 
         int[] currentPuzzle;
         List<MoveSet> currentMove;
@@ -81,7 +90,7 @@ public class SolutionBFS {
                         for (MoveSet move : currentMove) {
                             newCurrentMove.add(move);
                         }
-                        movePuzzle(newCurrentPuzzle, i, visitedConfig, queue, moveQueue, newCurrentMove);
+                        movePuzzle(newCurrentPuzzle, i, visitedID, queue, moveQueue, newCurrentMove);
                     }
                 }
             }
@@ -89,7 +98,20 @@ public class SolutionBFS {
         return resultMove;
     }
 
-    private void movePuzzle(int[] currentPuzzle, int i, List<int[]> visitedConfig, Queue<int[]> queue,
+    /**
+     Set for visited : CPSC 221
+     Instructor : Geoffrey Tien
+     */
+
+    private String makeListToString(int[] toBeConvertList) {
+        String uniqueString = "";
+        for (int i = 0; i < toBeConvertList.length; i++) {
+            uniqueString += String.valueOf(toBeConvertList[i]);
+        }
+        return uniqueString;
+    }
+
+    private void movePuzzle(int[] currentPuzzle, int i, Set<String> visitedID, Queue<int[]> queue,
                              Queue<List<MoveSet>> moveSetStack, List<MoveSet> currentMove) {
         SlidingList tempList = new SlidingList();
         tempList.createAQuestion(currentPuzzle, width, height);
@@ -110,29 +132,30 @@ public class SolutionBFS {
         }
 
         // check if the configuration already exits
-        if (isConfigNew(visitedConfig, tempConfig)) {
+//        if (isConfigNew(visitedID, tempConfig)) {
+        if (!visitedID.contains(makeListToString(tempConfig))) {
             queue.add(tempConfig);
             currentMove.add(nextMove);
             moveSetStack.add(currentMove);
-            visitedConfig.add(tempConfig);
+            visitedID.add(makeListToString(tempConfig));
         }
     }
 
-    private boolean isConfigNew(List<int[]> visitedConfig, int[] currentConfig) {
-        boolean areNew = true;
-        // loop through all config
-        for (int[] aConfig : visitedConfig) {
-            boolean isSame = true;
-            for (int i = 0; i < size; i++) {
-                // check if the config is the same
-                if (aConfig[i] != currentConfig[i]) {
-                    isSame = false;
-                }
-            }
-            if (isSame) {
-                areNew = false;
-            }
-        }
-        return areNew;
-    }
+//    private boolean isConfigNew(List<int[]> visitedConfig, int[] currentConfig) {
+//        boolean areNew = true;
+//        // loop through all config
+//        for (int[] aConfig : visitedConfig) {
+//            boolean isSame = true;
+//            for (int i = 0; i < size; i++) {
+//                // check if the config is the same
+//                if (aConfig[i] != currentConfig[i]) {
+//                    isSame = false;
+//                }
+//            }
+//            if (isSame) {
+//                areNew = false;
+//            }
+//        }
+//        return areNew;
+//    }
 }

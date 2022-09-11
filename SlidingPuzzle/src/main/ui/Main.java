@@ -13,10 +13,10 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-//        SlidingList slidingList = new SlidingList();
+        SlidingList slidingList = new SlidingList();
 //        SlidingPuzzleText slidingPuzzleText = new SlidingPuzzleText(slidingList);
 //        slidingPuzzleText.printPuzzle();
-//
+
 //        System.out.println();
 //        System.out.println();
 //
@@ -81,7 +81,7 @@ public class Main {
 //
 //        System.out.println();
 //        System.out.println();
-//
+
 //        // create a random puzzle
 //        puzzleSolver.createRandomPuzzle();
 //        SlidingPuzzleText randomPuzzleText = new SlidingPuzzleText(puzzleSolver.getCurrentSlidingList());
@@ -99,6 +99,21 @@ public class Main {
 //
 //        System.out.println();
 //        System.out.println();
+
+
+//        SlidingList possibleList = new SlidingList(4, 4);
+//        int[] possibleConfig = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 16, 14, 15};
+//        possibleList.createAQuestion(possibleConfig, 4, 4);
+//        SlidingList answerList = new SlidingList(4, 4);
+//        int[] answerConfig = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+//        answerList.createAQuestion(answerConfig, 4,4);
+//
+//        PuzzleSolver puzzleSolver = new PuzzleSolver(possibleList, answerList);
+//
+//        List<MoveSet> bfsAnswer = puzzleSolver.solvePuzzleDFS();
+//        for (MoveSet move : bfsAnswer) {
+//            System.out.println(move);
+//        }
 
 
 
